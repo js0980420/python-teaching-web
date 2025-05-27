@@ -108,6 +108,10 @@ def check_code():
     except Exception as e:
         return jsonify({'error': f'檢查程式碼時發生錯誤：{str(e)}'}), 500
 
-# Vercel需要一個可導入的app對象
+# 支持Railway和其他雲端平台部署
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port=8000) 
+    # 本地開發時使用
+    app.run(debug=True, host='127.0.0.1', port=8000)
+else:
+    # 生產環境時，app對象可以被gunicorn直接使用
+    pass 
